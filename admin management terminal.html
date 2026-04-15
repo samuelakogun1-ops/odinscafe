@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdinCore | Federal Banking Authentication</title>
+    <title>OdinCore Financial | Secure Authentication</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -12,28 +12,33 @@
             background-color: #020617; 
             color: white; 
             background-image: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .bank-card {
+        .security-container {
             background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid rgba(251, 191, 36, 0.3);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 191, 36, 0.1);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(251, 191, 36, 0.1);
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
+        input::placeholder { color: #475569; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body class="p-6">
     
-    <div class="w-full max-w-md bank-card rounded-[2.5rem] p-10 md:p-12 text-center">
-        <!-- Federal Logo -->
+    <div class="w-full max-w-md security-container rounded-[2.5rem] p-10 md:p-14 text-center">
+        <!-- Federal Reserve Style Logo -->
         <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-3xl mb-8 shadow-2xl shadow-amber-500/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
             </svg>
         </div>
 
-        <h1 class="text-3xl font-black tracking-tighter uppercase italic mb-2">ODINCORE</h1>
-        <p class="text-amber-500 font-mono text-[10px] tracking-[0.4em] uppercase font-bold mb-10">Institutional Banking Core</p>
+        <h1 class="text-3xl font-black tracking-tighter uppercase italic mb-1">ODINCORE</h1>
+        <p class="text-amber-500 font-mono text-[9px] tracking-[0.4em] uppercase font-bold mb-10">Institutional Banking Core</p>
 
         <div id="loginForm" class="space-y-6 text-left">
             <div>
@@ -49,11 +54,11 @@
                 Authorize Session
             </button>
             
-            <p id="error-msg" class="hidden text-red-500 text-[10px] text-center font-bold uppercase tracking-widest mt-4">Invalid Credentials / Access Denied</p>
+            <p id="error-msg" class="hidden text-red-500 text-[10px] text-center font-bold uppercase tracking-widest mt-4 animate-pulse">Invalid Credentials / Access Denied</p>
         </div>
 
         <div id="loading" class="hidden py-10">
-            <div class="animate-spin rounded-full h-12 w-12 border-4 border-amber-500 border-t-transparent mx-auto mb-4"></div>
+            <div class="animate-spin rounded-full h-12 w-12 border-4 border-amber-500 border-t-transparent mx-auto mb-6"></div>
             <p class="text-amber-500 mono text-xs uppercase tracking-widest font-bold">Verifying with Federal Reserve...</p>
         </div>
     </div>
@@ -72,7 +77,7 @@
                 form.classList.add('hidden');
                 loading.classList.remove('hidden');
                 
-                // Redirecting to the EXACT filename in your GitHub
+                // FIXED REDIRECT: This now matches your GitHub filename exactly
                 setTimeout(() => {
                     window.location.href = "admin management terminal.html";
                 }, 1500);
