@@ -3,77 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdinCore | Secure Terminal</title>
+    <title>OdinCore | Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #020617; color: white; overflow: hidden; }
-        .terminal-glow { box-shadow: 0 0 60px -15px rgba(59, 130, 246, 0.5); }
-        .grid-bg {
-            background-image: linear-gradient(to right, #111827 1px, transparent 1px), linear-gradient(to bottom, #111827 1px, transparent 1px);
-            background-size: 30px 30px;
+        :root {
+            --odin-blue: #3b82f6;
+            --odin-dark: #020617;
+            --odin-card: #0f172a;
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--odin-dark);
+            color: #f8fafc;
+            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
+            min-h-screen;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        .glow-text { text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        .pulse-dot {
+            width: 8px; height: 8px; background: #22c55e;
+            border-radius: 50%; display: inline-block;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen relative grid-bg">
-    
-    <div class="w-full max-w-md bg-slate-900/95 backdrop-blur-2xl border border-blue-500/40 rounded-3xl p-10 terminal-glow z-10">
-        <div class="text-center mb-10">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-2xl mb-6 shadow-2xl shadow-blue-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+<body class="p-4 md:p-8">
+
+    <!-- Top Navigation Bar -->
+    <nav class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
             </div>
-            <h1 class="text-3xl font-black tracking-tighter text-white uppercase">OdinCore</h1>
-            <p class="text-blue-400 font-mono text-[10px] tracking-[0.4em] mt-2 uppercase">Secure Access Terminal</p>
+            <div>
+                <h1 class="text-2xl font-bold tracking-tighter uppercase glow-text">OdinCore <span class="text-blue-500 font-light">OS</span></h1>
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mono">Level 4 Clearance Authorized</p>
+            </div>
         </div>
 
-        <div id="loginForm" class="space-y-6">
-            <div>
-                <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-1">Authorized Staff ID</label>
-                <input type="text" id="admin-id" placeholder="ENTER ID" class="w-full px-5 py-4 bg-black border border-slate-800 rounded-xl focus:border-blue-500 outline-none transition-all text-white font-mono uppercase">
+        <div class="flex items-center gap-6 glass-card px-6 py-3 rounded-2xl">
+            <div class="text-right">
+                <p id="clock" class="text-lg font-bold mono">00:00:00</p>
+                <p id="date" class="text-[10px] text-slate-400 uppercase tracking-tighter">Initializing...</p>
             </div>
-            <div>
-                <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-1">Security Passcode</label>
-                <input type="password" id="password" placeholder="••••••••" class="w-full px-5 py-4 bg-black border border-slate-800 rounded-xl focus:border-blue-500 outline-none transition-all text-white font-mono">
+            <div class="h-8 w-[1px] bg-slate-800"></div>
+            <div class="flex items-center gap-2">
+                <span class="pulse-dot"></span>
+                <span class="text-xs font-bold text-green-500 mono">SECURE</span>
             </div>
-            <button onclick="handleLogin()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl shadow-xl shadow-blue-900/40 transition-all active:scale-95 text-white uppercase tracking-widest text-sm">
-                Unlock Systems
-            </button>
-            <p id="error-msg" class="text-red-500 text-xs mt-4 text-center hidden font-bold animate-pulse uppercase">Critical Error: Credentials Invalid</p>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <main class="max-w-7xl mx-auto">
+        
+        <!-- Metrics Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">Total Orders</p>
+                <h3 class="text-3xl font-bold tracking-tighter">1,284</h3>
+                <div class="mt-4 h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div class="bg-blue-500 h-full" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">Live Revenue</p>
+                <h3 class="text-3xl font-bold tracking-tighter text-blue-400">$42,910</h3>
+                <p class="text-[10px] text-green-500 font-bold mt-2">+4.2% Increase</p>
+            </div>
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">Active Staff</p>
+                <h3 class="text-3xl font-bold tracking-tighter">12</h3>
+                <p class="text-[10px] text-slate-400 font-bold mt-2">All terminals active</p>
+            </div>
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">System Load</p>
+                <h3 class="text-3xl font-bold tracking-tighter">14%</h3>
+                <p class="text-[10px] text-blue-500 font-bold mt-2">Server Optimal</p>
+            </div>
         </div>
 
-        <div id="success-state" class="hidden text-center py-6">
-            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent mb-4"></div>
-            <div class="text-blue-400 font-mono text-xs tracking-widest">ACCESS GRANTED. INITIALIZING...</div>
+        <!-- Interface Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Quick Actions -->
+            <div class="lg:col-span-1 space-y-6">
+                <h2 class="text-sm font-bold text-blue-500 uppercase tracking-widest px-2">Control Modules</h2>
+                <div class="grid grid-cols-1 gap-4">
+                    <button class="glass-card hover:bg-blue-600/20 group p-5 rounded-2xl transition-all text-left">
+                        <h4 class="font-bold text-white group-hover:text-blue-400 transition-colors">Menu Management</h4>
+                        <p class="text-xs text-slate-500">Update items and pricing</p>
+                    </button>
+                    <button class="glass-card hover:bg-blue-600/20 group p-5 rounded-2xl transition-all text-left">
+                        <h4 class="font-bold text-white group-hover:text-blue-400 transition-colors">Transaction Logs</h4>
+                        <p class="text-xs text-slate-500">View detailed history</p>
+                    </button>
+                    <button class="glass-card hover:bg-blue-600/20 group p-5 rounded-2xl transition-all text-left">
+                        <h4 class="font-bold text-white group-hover:text-blue-400 transition-colors">Employee Database</h4>
+                        <p class="text-xs text-slate-500">Manage staff access</p>
+                    </button>
+                    <button onclick="window.location.href='admin%20login.html'" class="glass-card hover:bg-red-600/20 border-red-500/20 p-5 rounded-2xl transition-all text-left">
+                        <h4 class="font-bold text-red-400">Terminate Session</h4>
+                        <p class="text-xs text-slate-500">Logout of OdinCore</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Log Panel -->
+            <div class="lg:col-span-2">
+                <div class="glass-card rounded-3xl h-full overflow-hidden flex flex-col">
+                    <div class="p-6 border-b border-slate-800 flex justify-between items-center">
+                        <h2 class="font-bold uppercase tracking-widest text-sm">Real-time Terminal Logs</h2>
+                        <span class="text-[10px] bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full font-bold uppercase">Auto-updating</span>
+                    </div>
+                    <div class="p-6 font-mono text-xs space-y-3 overflow-y-auto bg-black/40 flex-grow">
+                        <p class="text-slate-500">[19:10:02] <span class="text-blue-400">SYS_ADMIN</span> Session established via terminal ID: ODIN-X99</p>
+                        <p class="text-slate-500">[19:10:15] <span class="text-green-500">SUCCESS</span> Database sync complete.</p>
+                        <p class="text-slate-500">[19:11:00] <span class="text-yellow-500">NOTIF</span> Order #4920 completed successfully.</p>
+                        <p class="text-slate-500">[19:11:45] <span class="text-blue-400">INFO</span> Cache maintenance executed in 14ms.</p>
+                        <div class="animate-pulse border-l-2 border-blue-500 pl-4 py-1 mt-4">
+                            <p class="text-white font-bold tracking-widest">AWAITING INPUT_</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+
+        <footer class="mt-12 text-center text-slate-600 text-[10px] uppercase tracking-[0.5em]">
+            &copy; 2026 Odin Financial Group | Proprietary Data Stream
+        </footer>
+    </main>
 
     <script>
-        function handleLogin() {
-            const id = document.getElementById('admin-id').value;
-            const pass = document.getElementById('password').value;
-            const error = document.getElementById('error-msg');
-            const form = document.getElementById('loginForm');
-            const success = document.getElementById('success-state');
-
-            // Updated Credentials
-            const VALID_ID = 'ADMIN-ODIN';
-            const VALID_PASS = 'ODIN-SECURE-2026';
-
-            if (id.toUpperCase() === VALID_ID && pass === VALID_PASS) {
-                error.classList.add('hidden');
-                form.classList.add('hidden');
-                success.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    window.location.href = "admin%20management%20terminal.html";
-                }, 1200);
-            } else {
-                error.classList.remove('hidden');
-                document.getElementById('password').value = '';
-            }
+        // Real-time Clock Function
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString('en-GB', { hour12: false });
+            document.getElementById('date').textContent = now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
         }
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 </html>
