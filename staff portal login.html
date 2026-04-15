@@ -3,108 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Portal | Odin Financial Group</title>
+    <title>OdinCore | Secure Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #020617; 
-        }
-        .admin-glow { 
-            box-shadow: 0 0 50px -12px rgba(59, 130, 246, 0.2); 
-        }
-        input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: white; overflow: hidden; }
+        .terminal-glow { box-shadow: 0 0 60px -15px rgba(59, 130, 246, 0.5); }
+        .grid-bg {
+            background-image: linear-gradient(to right, #111827 1px, transparent 1px), linear-gradient(to bottom, #111827 1px, transparent 1px);
+            background-size: 30px 30px;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 admin-glow">
-        <!-- Logo/Header -->
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-xl mb-4 shadow-lg shadow-blue-900/20">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+<body class="flex items-center justify-center min-h-screen relative grid-bg">
+    
+    <div class="w-full max-w-md bg-slate-900/95 backdrop-blur-2xl border border-blue-500/40 rounded-3xl p-10 terminal-glow z-10">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-2xl mb-6 shadow-2xl shadow-blue-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
             </div>
-            <h1 class="text-2xl font-extrabold text-white tracking-tight">Staff Portal</h1>
-            <p class="text-slate-400 mt-1">Odin Financial Group Terminal</p>
+            <h1 class="text-3xl font-black tracking-tighter text-white uppercase">OdinCore</h1>
+            <p class="text-blue-400 font-mono text-[10px] tracking-[0.4em] mt-2 uppercase">Secure Access Terminal</p>
         </div>
 
-        <!-- Login Form -->
-        <form id="loginForm" class="space-y-5">
+        <div id="loginForm" class="space-y-6">
             <div>
-                <label class="block text-sm font-semibold text-slate-300 mb-1.5" for="admin-id">Admin Identifier</label>
-                <input 
-                    type="text" 
-                    id="admin-id" 
-                    placeholder="Enter your staff ID" 
-                    class="w-full px-4 py-3 bg-slate-950 border border-slate-700 text-white rounded-lg transition-all"
-                    required
-                >
+                <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-1">Authorized Staff ID</label>
+                <input type="text" id="admin-id" placeholder="ENTER ID" class="w-full px-5 py-4 bg-black border border-slate-800 rounded-xl focus:border-blue-500 outline-none transition-all text-white font-mono uppercase">
             </div>
-
             <div>
-                <label class="block text-sm font-semibold text-slate-300 mb-1.5" for="password">Security Key</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    placeholder="••••••••" 
-                    class="w-full px-4 py-3 bg-slate-950 border border-slate-700 text-white rounded-lg transition-all"
-                    required
-                >
+                <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-1">Security Passcode</label>
+                <input type="password" id="password" placeholder="••••••••" class="w-full px-5 py-4 bg-black border border-slate-800 rounded-xl focus:border-blue-500 outline-none transition-all text-white font-mono">
             </div>
+            <button onclick="handleLogin()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl shadow-xl shadow-blue-900/40 transition-all active:scale-95 text-white uppercase tracking-widest text-sm">
+                Unlock Systems
+            </button>
+            <p id="error-msg" class="text-red-500 text-xs mt-4 text-center hidden font-bold animate-pulse uppercase">Critical Error: Credentials Invalid</p>
+        </div>
 
-            <div class="pt-2">
-                <button 
-                    type="submit" 
-                    class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg shadow-lg shadow-blue-900/40 transition-all active:scale-[0.98]"
-                >
-                    Authenticate Access
-                </button>
-            </div>
-        </form>
-
-        <!-- Footer Info -->
-        <div class="mt-8 pt-6 border-t border-slate-800 text-center">
-            <p class="text-xs text-slate-500 leading-relaxed uppercase tracking-widest">
-                Classified System <br>
-                Authorized Personnel Only
-            </p>
+        <div id="success-state" class="hidden text-center py-6">
+            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent mb-4"></div>
+            <div class="text-blue-400 font-mono text-xs tracking-widest">ACCESS GRANTED. INITIALIZING...</div>
         </div>
     </div>
 
-    <!-- Simple Success/Error Notification -->
-    <div id="toast" class="fixed bottom-6 right-6 px-6 py-3 rounded-lg text-white font-medium transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none"></div>
-
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const adminId = document.getElementById('admin-id').value;
-            const password = document.getElementById('password').value;
-            const toast = document.getElementById('toast');
+        function handleLogin() {
+            const id = document.getElementById('admin-id').value;
+            const pass = document.getElementById('password').value;
+            const error = document.getElementById('error-msg');
+            const form = document.getElementById('loginForm');
+            const success = document.getElementById('success-state');
 
-            // Simple demo authentication logic
-            if (adminId && password) {
-                showToast("Authenticating credentials...", "bg-blue-600");
+            // Updated Credentials
+            const VALID_ID = 'ADMIN-ODIN';
+            const VALID_PASS = 'ODIN-SECURE-2026';
+
+            if (id.toUpperCase() === VALID_ID && pass === VALID_PASS) {
+                error.classList.add('hidden');
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
                 
-                // Simulate a slight delay for the "secure" feel
                 setTimeout(() => {
-                    showToast("Access Granted. Redirecting to Terminal...", "bg-green-600");
-                }, 1500);
+                    window.location.href = "admin%20management%20terminal.html";
+                }, 1200);
+            } else {
+                error.classList.remove('hidden');
+                document.getElementById('password').value = '';
             }
-        });
-
-        function showToast(message, bgColor) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `fixed bottom-6 right-6 px-6 py-3 rounded-lg text-white font-medium transform transition-all duration-300 ${bgColor}`;
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-24', 'opacity-0');
-            }, 3000);
         }
     </script>
 </body>
