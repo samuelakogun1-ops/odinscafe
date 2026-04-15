@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Portal | Odin Financial Group</title>
+    <title>OdinCore | Admin Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #020617; color: white; }
-        .admin-glow { box-shadow: 0 0 50px -12px rgba(59, 130, 246, 0.3); }
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: white; overflow: hidden; }
+        .terminal-glow { box-shadow: 0 0 50px -10px rgba(59, 130, 246, 0.4); }
+        .grid-bg {
+            background-image: linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 admin-glow">
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-xl mb-4 shadow-lg shadow-blue-900/20">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+<body class="flex items-center justify-center min-h-screen relative grid-bg">
+    <div class="w-full max-w-md bg-slate-900/90 backdrop-blur-xl border border-blue-500/30 rounded-3xl p-10 terminal-glow z-10">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-2xl mb-6 shadow-2xl shadow-blue-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
             </div>
-            <h1 class="text-2xl font-extrabold tracking-tight">Staff Portal</h1>
-            <p class="text-slate-400 mt-1">Odin Financial Group Terminal</p>
+            <h1 class="text-3xl font-black tracking-tighter text-white uppercase">OdinCore</h1>
+            <p class="text-blue-400 font-mono text-xs tracking-[0.3em] mt-2 uppercase">Internal Admin Access</p>
         </div>
 
-        <div id="loginForm">
-            <div class="space-y-5">
-                <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-1.5">STAFF EMPLOYEE ID</label>
-                    <input type="text" id="admin-id" placeholder="ADM-99-0000" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg focus:border-blue-500 outline-none transition-all text-white">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-1.5">SECURITY PASSCODE</label>
-                    <input type="password" id="password" placeholder="••••••••" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg focus:border-blue-500 outline-none transition-all text-white">
-                </div>
-                <button onclick="handleLogin()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-lg shadow-lg shadow-blue-900/40 transition-all active:scale-95 text-white">
-                    Access Control Center
-                </button>
+        <div id="loginForm" class="space-y-6">
+            <div>
+                <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-1">Staff ID</label>
+                <input type="text" id="admin-id" placeholder="ADM-99-0000" class="w-full px-5 py-4 bg-slate-950 border border-slate-800 rounded-xl focus:border-blue-500 outline-none transition-all text-white font-mono">
             </div>
-            <p id="error-msg" class="text-red-400 text-sm mt-4 text-center hidden">Invalid credentials. Access Denied.</p>
+            <div>
+                <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 px-1">Passcode</label>
+                <input type="password" id="password" placeholder="••••••••" class="w-full px-5 py-4 bg-slate-950 border border-slate-800 rounded-xl focus:border-blue-500 outline-none transition-all text-white font-mono">
+            </div>
+            <button onclick="handleLogin()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl shadow-xl shadow-blue-900/40 transition-all active:scale-95 text-white uppercase tracking-widest text-sm">
+                Login to Terminal
+            </button>
+            <p id="error-msg" class="text-red-500 text-xs mt-4 text-center hidden font-bold animate-pulse uppercase">Access Denied: Check Credentials</p>
         </div>
 
-        <div id="success-state" class="hidden text-center py-4">
-            <div class="text-green-400 mb-2 font-bold">✓ Authentication Successful</div>
-            <p class="text-slate-400 text-sm">Loading Management Terminal...</p>
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-slate-800 text-center">
-            <p class="text-xs text-slate-500 uppercase tracking-widest">Authorized Personnel Only</p>
+        <div id="success-state" class="hidden text-center py-6">
+            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent mb-4"></div>
+            <div class="text-blue-400 font-mono text-xs tracking-widest">BOOTING MANAGEMENT SYSTEMS...</div>
         </div>
     </div>
 
@@ -56,16 +56,16 @@
             const form = document.getElementById('loginForm');
             const success = document.getElementById('success-state');
 
-            // Fixed Credentials
+            // Your set credentials
             if (id === 'ADM-99-0000' && pass === 'odin@2024') {
                 error.classList.add('hidden');
                 form.classList.add('hidden');
                 success.classList.remove('hidden');
                 
-                // Redirecting to the correct filename in your GitHub
+                // This link correctly targets your file with the spaces in the name
                 setTimeout(() => {
                     window.location.href = "admin%20management%20terminal.html";
-                }, 1000);
+                }, 1200);
             } else {
                 error.classList.remove('hidden');
             }
