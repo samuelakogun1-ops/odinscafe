@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Management | Odin Financial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .glass-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .chip {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            width: 45px;
+            height: 35px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <nav class="bg-white border-b px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <button onclick="window.location.href='dashboard.html'" class="text-slate-500 hover:text-slate-900 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7"></path></svg>
+            </button>
+            <h1 class="text-lg font-bold text-slate-900">My Cards</h1>
+        </div>
+        <div class="text-blue-600 font-bold text-sm">Add New Card</div>
+    </nav>
+
+    <main class="flex-1 p-6 max-w-lg mx-auto w-full">
+        <!-- The Physical Card Representation -->
+        <div class="glass-card w-full aspect-[1.58/1] rounded-[2rem] p-8 text-white relative overflow-hidden mb-10">
+            <div class="flex justify-between items-start relative z-10">
+                <div class="chip"></div>
+                <div class="text-xl font-black italic tracking-tighter">VISA</div>
+            </div>
+            
+            <div class="mt-12 relative z-10">
+                <p class="text-xl font-mono tracking-[0.25em] mb-4" id="cardNum">**** **** **** 5562</p>
+                <div class="flex gap-10">
+                    <div>
+                        <p class="text-[10px] uppercase opacity-50 font-bold mb-1">Card Holder</p>
+                        <p class="text-sm font-semibold tracking-wide uppercase">Samuel Akogun</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase opacity-50 font-bold mb-1">Expires</p>
+                        <p class="text-sm font-semibold tracking-wide">12 / 28</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative Circles -->
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500/10 rounded-full"></div>
+            <div class="absolute right-20 top-0 w-20 h-20 bg-white/5 rounded-full"></div>
+        </div>
+
+        <!-- Card Controls -->
+        <div class="space-y-4">
+            <div class="bg-white p-6 rounded-3xl border border-slate-100 flex items-center justify-between shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="bg-blue-50 p-3 rounded-2xl text-blue-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800">Freeze Card</p>
+                        <p class="text-xs text-slate-500">Instantly disable this card</p>
+                    </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+
+            <div class="bg-white p-6 rounded-3xl border border-slate-100 flex items-center justify-between shadow-sm cursor-pointer hover:bg-slate-50 transition" onclick="toggleDetails()">
+                <div class="flex items-center gap-4">
+                    <div class="bg-slate-50 p-3 rounded-2xl text-slate-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800">Show Card Details</p>
+                        <p class="text-xs text-slate-500">Reveal card number and CVV</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 p-6 bg-amber-50 rounded-3xl border border-amber-100 flex gap-4">
+            <div class="text-amber-600 pt-1">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0110 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+            </div>
+            <p class="text-xs text-amber-800 leading-relaxed">
+                <strong>Safety Tip:</strong> Your virtual card number is different from your physical card for added online security.
+            </p>
+        </div>
+    </main>
+
+    <script>
+        function toggleDetails() {
+            const card = document.getElementById('cardNum');
+            if(card.innerText.includes('****')) {
+                card.innerText = '4532 8871 0092 5562';
+            } else {
+                card.innerText = '**** **** **** 5562';
+            }
+        }
+    </script>
+</body>
+</html>
