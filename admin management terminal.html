@@ -3,159 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdinCore | Command Center</title>
+    <title>OdinCore | Federal Banking Core</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --odin-blue: #3b82f6;
-            --odin-dark: #020617;
-            --odin-card: #0f172a;
+            --bank-gold: #fbbf24;
+            --bank-blue: #2563eb;
+            --bank-dark: #020617;
         }
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--odin-dark);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bank-dark);
             color: #f8fafc;
-            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
-            min-h-screen;
+            background-image: radial-gradient(circle at top right, #1e1b4b 0%, #020617 100%);
+            min-height: 100vh;
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        .security-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        .glow-text { text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
-        .pulse-dot {
-            width: 8px; height: 8px; background: #22c55e;
+        .gold-glow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
+        .border-gold { border-color: rgba(251, 191, 36, 0.3); }
+        .status-pulse {
+            width: 10px; height: 10px; background: #10b981;
             border-radius: 50%; display: inline-block;
-            box-shadow: 0 0 10px #22c55e;
+            box-shadow: 0 0 12px #10b981;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
             0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
+            50% { transform: scale(1.4); opacity: 0.6; }
             100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-10">
 
-    <!-- Top Navigation Bar -->
-    <nav class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
-        <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+    <!-- Banking Header -->
+    <nav class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+        <div class="flex items-center gap-5">
+            <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-amber-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                 </svg>
             </div>
             <div>
-                <h1 class="text-2xl font-bold tracking-tighter uppercase glow-text">OdinCore <span class="text-blue-500 font-light">OS</span></h1>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mono">Level 4 Clearance Authorized</p>
+                <h1 class="text-3xl font-extrabold tracking-tighter uppercase gold-glow">ODINCORE <span class="text-amber-500 font-light">FINANCIAL</span></h1>
+                <p class="text-[10px] text-amber-500/70 font-bold uppercase tracking-[0.3em] mono">Institutional Banking Core | USA Division</p>
             </div>
         </div>
 
-        <div class="flex items-center gap-6 glass-card px-6 py-3 rounded-2xl">
+        <div class="flex items-center gap-8 security-card px-8 py-4 rounded-3xl border-gold">
             <div class="text-right">
-                <p id="clock" class="text-lg font-bold mono">00:00:00</p>
-                <p id="date" class="text-[10px] text-slate-400 uppercase tracking-tighter">Initializing...</p>
+                <p id="clock" class="text-xl font-bold mono text-white">00:00:00</p>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">EST/FEDERAL TIME</p>
             </div>
-            <div class="h-8 w-[1px] bg-slate-800"></div>
-            <div class="flex items-center gap-2">
-                <span class="pulse-dot"></span>
-                <span class="text-xs font-bold text-green-500 mono">SECURE</span>
+            <div class="h-10 w-[1px] bg-slate-800"></div>
+            <div class="flex items-center gap-3">
+                <span class="status-pulse"></span>
+                <span class="text-xs font-black text-green-500 mono uppercase tracking-widest">Encrypted</span>
             </div>
         </div>
     </nav>
 
-    <!-- Dashboard Content -->
+    <!-- Global Metrics -->
     <main class="max-w-7xl mx-auto">
-        
-        <!-- Metrics Row -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">Total Orders</p>
-                <h3 class="text-3xl font-bold tracking-tighter">1,284</h3>
-                <div class="mt-4 h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                    <div class="bg-blue-500 h-full" style="width: 75%"></div>
-                </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div class="security-card p-8 rounded-[2rem] border-l-4 border-l-amber-500">
+                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Total Assets Under Management</p>
+                <h3 class="text-3xl font-bold tracking-tighter">$4.82B</h3>
+                <p class="text-[10px] text-blue-400 font-bold mt-3 uppercase">USD Reserve Verified</p>
             </div>
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">Live Revenue</p>
-                <h3 class="text-3xl font-bold tracking-tighter text-blue-400">$42,910</h3>
-                <p class="text-[10px] text-green-500 font-bold mt-2">+4.2% Increase</p>
+            <div class="security-card p-8 rounded-[2rem]">
+                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Pending Wire Transfers</p>
+                <h3 class="text-3xl font-bold tracking-tighter text-amber-500">24</h3>
+                <p class="text-[10px] text-amber-600/70 font-bold mt-3 uppercase">Requires Authorization</p>
             </div>
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">Active Staff</p>
-                <h3 class="text-3xl font-bold tracking-tighter">12</h3>
-                <p class="text-[10px] text-slate-400 font-bold mt-2">All terminals active</p>
+            <div class="security-card p-8 rounded-[2rem]">
+                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Active Accounts</p>
+                <h3 class="text-3xl font-bold tracking-tighter">12,402</h3>
+                <p class="text-[10px] text-slate-400 font-bold mt-3 uppercase">Global Coverage</p>
             </div>
-            <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">System Load</p>
-                <h3 class="text-3xl font-bold tracking-tighter">14%</h3>
-                <p class="text-[10px] text-blue-500 font-bold mt-2">Server Optimal</p>
+            <div class="security-card p-8 rounded-[2rem]">
+                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">Security Level</p>
+                <h3 class="text-3xl font-bold tracking-tighter text-blue-500">Tier 4</h3>
+                <p class="text-[10px] text-green-500 font-bold mt-3 uppercase">Firewall Active</p>
             </div>
         </div>
 
-        <!-- Interface Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- Quick Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Command Modules -->
             <div class="lg:col-span-1 space-y-6">
-                <h2 class="text-sm font-bold text-blue-500 uppercase tracking-widest px-2">Control Modules</h2>
-                <div class="grid grid-cols-1 gap-4">
-                    <button class="glass-card hover:bg-blue-600/20 group p-5 rounded-2xl transition-all text-left">
-                        <h4 class="font-bold text-white group-hover:text-blue-400 transition-colors">Menu Management</h4>
-                        <p class="text-xs text-slate-500">Update items and pricing</p>
+                <h2 class="text-xs font-black text-amber-500 uppercase tracking-[0.4em] px-2 mb-4">Core Modules</h2>
+                <div class="grid grid-cols-1 gap-5">
+                    <button class="security-card hover:bg-amber-500/10 group p-6 rounded-2xl transition-all text-left border-gold/10">
+                        <h4 class="font-bold text-white group-hover:text-amber-400 transition-colors uppercase tracking-tight">User Account Matrix</h4>
+                        <p class="text-xs text-slate-500 mt-1">Manage balances, limits & KYC</p>
                     </button>
-                    <button class="glass-card hover:bg-blue-600/20 group p-5 rounded-2xl transition-all text-left">
-                        <h4 class="font-bold text-white group-hover:text-blue-400 transition-colors">Transaction Logs</h4>
-                        <p class="text-xs text-slate-500">View detailed history</p>
+                    <button class="security-card hover:bg-amber-500/10 group p-6 rounded-2xl transition-all text-left border-gold/10">
+                        <h4 class="font-bold text-white group-hover:text-amber-400 transition-colors uppercase tracking-tight">Wire Transfer Desk</h4>
+                        <p class="text-xs text-slate-500 mt-1">SWIFT / SEPA / ACH Clearance</p>
                     </button>
-                    <button class="glass-card hover:bg-blue-600/20 group p-5 rounded-2xl transition-all text-left">
-                        <h4 class="font-bold text-white group-hover:text-blue-400 transition-colors">Employee Database</h4>
-                        <p class="text-xs text-slate-500">Manage staff access</p>
+                    <button class="security-card hover:bg-amber-500/10 group p-6 rounded-2xl transition-all text-left border-gold/10">
+                        <h4 class="font-bold text-white group-hover:text-amber-400 transition-colors uppercase tracking-tight">Security & AML</h4>
+                        <p class="text-xs text-slate-500 mt-1">Fraud detection & session control</p>
                     </button>
-                    <button onclick="window.location.href='admin%20login.html'" class="glass-card hover:bg-red-600/20 border-red-500/20 p-5 rounded-2xl transition-all text-left">
-                        <h4 class="font-bold text-red-400">Terminate Session</h4>
-                        <p class="text-xs text-slate-500">Logout of OdinCore</p>
+                    <button onclick="window.location.href='admin login.html'" class="security-card hover:bg-red-950/40 border-red-900/30 p-6 rounded-2xl transition-all text-left">
+                        <h4 class="font-bold text-red-500 uppercase tracking-widest text-sm">Kill Switch (Logout)</h4>
+                        <p class="text-xs text-slate-500 mt-1">Immediate session termination</p>
                     </button>
                 </div>
             </div>
 
-            <!-- Main Log Panel -->
+            <!-- Global Transaction Stream -->
             <div class="lg:col-span-2">
-                <div class="glass-card rounded-3xl h-full overflow-hidden flex flex-col">
-                    <div class="p-6 border-b border-slate-800 flex justify-between items-center">
-                        <h2 class="font-bold uppercase tracking-widest text-sm">Real-time Terminal Logs</h2>
-                        <span class="text-[10px] bg-blue-600/20 text-blue-400 px-3 py-1 rounded-full font-bold uppercase">Auto-updating</span>
+                <div class="security-card rounded-[2.5rem] h-full overflow-hidden flex flex-col border-gold/20">
+                    <div class="p-8 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+                        <h2 class="font-black uppercase tracking-widest text-xs text-amber-500">Live Transaction Stream</h2>
+                        <span class="text-[9px] bg-amber-500/10 text-amber-500 px-4 py-1.5 rounded-full font-black uppercase tracking-tighter">Verified Stream</span>
                     </div>
-                    <div class="p-6 font-mono text-xs space-y-3 overflow-y-auto bg-black/40 flex-grow">
-                        <p class="text-slate-500">[19:10:02] <span class="text-blue-400">SYS_ADMIN</span> Session established via terminal ID: ODIN-X99</p>
-                        <p class="text-slate-500">[19:10:15] <span class="text-green-500">SUCCESS</span> Database sync complete.</p>
-                        <p class="text-slate-500">[19:11:00] <span class="text-yellow-500">NOTIF</span> Order #4920 completed successfully.</p>
-                        <p class="text-slate-500">[19:11:45] <span class="text-blue-400">INFO</span> Cache maintenance executed in 14ms.</p>
-                        <div class="animate-pulse border-l-2 border-blue-500 pl-4 py-1 mt-4">
-                            <p class="text-white font-bold tracking-widest">AWAITING INPUT_</p>
+                    <div id="terminal-body" class="p-8 font-mono text-[11px] space-y-4 overflow-y-auto bg-black/60 flex-grow max-h-[450px]">
+                        <p class="text-slate-500">[08:42:10] <span class="text-blue-400">AUTH_SUCCESS</span> Root Admin session established via US-East Node.</p>
+                        <p class="text-slate-500">[08:43:05] <span class="text-green-500">WIRE_SETTLE</span> $142,000.00 SWIFT from <span class="text-white">CHASE_NY</span> -> <span class="text-white">ODIN_VAULT</span>.</p>
+                        <p class="text-slate-500">[08:44:12] <span class="text-amber-500">AML_FLAG</span> High-value transfer detected from IP 192.168.1.1 (Verification required).</p>
+                        <p class="text-slate-500">[08:45:00] <span class="text-slate-400">SYS_CHECK</span> Global balance reconciliation: 100% Match.</p>
+                        <div class="animate-pulse border-l-2 border-amber-500 pl-4 py-2 mt-6">
+                            <p class="text-white font-bold tracking-[0.2em] text-xs">AWAITING SYSTEM COMMAND_</p>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <footer class="mt-12 text-center text-slate-600 text-[10px] uppercase tracking-[0.5em]">
-            &copy; 2026 Odin Financial Group | Proprietary Data Stream
+        <footer class="mt-16 text-center text-slate-700 text-[10px] font-bold uppercase tracking-[0.6em] pb-10">
+            Odin Financial Group | Department of Treasury Compliance Required
         </footer>
     </main>
 
     <script>
-        // Real-time Clock Function
         function updateTime() {
             const now = new Date();
-            document.getElementById('clock').textContent = now.toLocaleTimeString('en-GB', { hour12: false });
-            document.getElementById('date').textContent = now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+            document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
         }
         setInterval(updateTime, 1000);
         updateTime();
