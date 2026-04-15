@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Terminal | Odin Financial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+        .stat-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(51, 65, 85, 0.5); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Admin Header -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold">A</div>
+            <div class="text-lg font-black tracking-tighter">ODIN<span class="text-blue-500">CONTROL</span></div>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full"></span> SERVER: ACTIVE</span>
+            <button onclick="window.location.href='index.html'" class="bg-red-500/10 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition">LOGOUT</button>
+        </div>
+    </nav>
+
+    <main class="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-[10px] uppercase text-slate-500 font-bold mb-1">Total Deposits</p>
+                <h3 class="text-2xl font-black text-white">$12.4M</h3>
+            </div>
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-[10px] uppercase text-slate-500 font-bold mb-1">Active Users</p>
+                <h3 class="text-2xl font-black text-white">1,204</h3>
+            </div>
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-[10px] uppercase text-slate-500 font-bold mb-1">Pending Wires</p>
+                <h3 class="text-2xl font-black text-yellow-500">14</h3>
+            </div>
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-[10px] uppercase text-slate-500 font-bold mb-1">Flagged Activity</p>
+                <h3 class="text-2xl font-black text-red-500">3</h3>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Pending Approvals -->
+            <div class="lg:col-span-2 space-y-6">
+                <h2 class="text-lg font-bold flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Pending Wire Approvals
+                </h2>
+                
+                <div class="space-y-4">
+                    <!-- Wire 1 -->
+                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-[2rem] flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-400 uppercase">SA</div>
+                            <div>
+                                <p class="font-bold text-white">Samuel Akogun</p>
+                                <p class="text-[10px] text-slate-500 uppercase font-medium">To: Bank of America • 09882711</p>
+                            </div>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="text-lg font-black text-white">$25,000.00</p>
+                            <p class="text-[10px] text-yellow-500 font-bold uppercase">Awaiting Signature</p>
+                        </div>
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <button onclick="this.parentElement.parentElement.style.display='none'" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl text-xs font-bold transition">APPROVE</button>
+                            <button onclick="this.parentElement.parentElement.style.opacity='0.5'" class="bg-slate-800 hover:bg-red-500 text-white px-6 py-3 rounded-xl text-xs font-bold transition">DECLINE</button>
+                        </div>
+                    </div>
+
+                    <!-- Wire 2 -->
+                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-[2rem] flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-400 uppercase">JD</div>
+                            <div>
+                                <p class="font-bold text-white">John Doe</p>
+                                <p class="text-[10px] text-slate-500 uppercase font-medium">To: Chase Bank • 22119938</p>
+                            </div>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="text-lg font-black text-white">$1,450.00</p>
+                            <p class="text-[10px] text-yellow-500 font-bold uppercase">Pending Verification</p>
+                        </div>
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <button onclick="this.parentElement.parentElement.style.display='none'" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl text-xs font-bold transition">APPROVE</button>
+                            <button class="bg-slate-800 hover:bg-red-500 text-white px-6 py-3 rounded-xl text-xs font-bold transition">DECLINE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Control Sidebar -->
+            <div class="space-y-6">
+                <h2 class="text-lg font-bold flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Account Tools
+                </h2>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-[2rem] space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Search User</label>
+                        <input type="text" placeholder="UID or Name..." class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl text-sm focus:border-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Adjust Balance ($)</label>
+                        <input type="number" placeholder="Enter amount..." class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl text-sm focus:border-blue-500 outline-none">
+                        <button class="w-full mt-4 bg-slate-800 hover:bg-blue-600 text-white font-bold py-3 rounded-xl text-xs transition uppercase">Update Account</button>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold mb-4">Quick Actions</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="bg-slate-800 p-3 rounded-xl text-[10px] font-bold hover:bg-red-900/30 transition">LOCK USER</button>
+                            <button class="bg-slate-800 p-3 rounded-xl text-[10px] font-bold hover:bg-green-900/30 transition">VERIFY ID</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-8 text-center border-t border-slate-800 bg-slate-950">
+        <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.3em]">ODIN FINANCIAL CORE • v4.2.0-STABLE</p>
+    </footer>
+
+</body>
+</html>
